@@ -12,9 +12,11 @@ class AnalisadorSteam:
   Sucesso: 20 carregados de 'amostra_20_jogos.csv'.
 
   >>> # 2. Teste da pergunta 1 (gratuitos):
-  >>> pct_gratis, gratis = analisador_teste.calcular_pct_gratuitos()
-  >>> round(pct_gratis, 2)
+  >>> pct_free, pct_paid = analisador_teste.calcular_pct_gratuitos()
+  >>> round(pct_free, 2)
   35.0
+  >>> round(pct_paid, 2)
+  65.0
 
   >>> # 3. Teste da pergunta 2 (ano com mais lançamentos)
   >>> analisador_teste.ano_mais_lancamentos()
@@ -62,7 +64,7 @@ class AnalisadorSteam:
     pct_gratuitos = gratuitos / total * 100
     pct_pagos = pagos / total * 100
 
-    return pct_gratuitos, gratuitos
+    return pct_gratuitos, pct_pagos
 
   #Pergunta 2: Ano com mais lançamentos
   def ano_mais_lancamentos(self):
