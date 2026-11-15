@@ -18,9 +18,9 @@ class AnalisadorSteam:
   >>> round(pct_paid, 2)
   65.0
 
-  >>> # 3. Teste da pergunta 2 (ano com mais lançamentos)
+  >>> # 3. Teste da pergunta 2 (ano com mais lançamentos - retorna lista para empates)
   >>> analisador_teste.ano_mais_lancamentos()
-  (2022, 6)
+  ([2022], 6)
 
   >>> # 4. Teste da pergunta 3 (jogos RPG em português)
   >>> len(analisador_teste.jogos_rpg_pt())
@@ -66,10 +66,10 @@ class AnalisadorSteam:
 
     return pct_gratuitos, pct_pagos
 
-  #Pergunta 2: Ano com mais lançamentos
+  #Pergunta 2: Ano com mais lançamentos (retorna lista para empates)
   def ano_mais_lancamentos(self):
     if not self.jogos:
-      return None, 0
+      return [], 0
 
     contagem_anos = {}
     for jogo in self.jogos:
@@ -81,13 +81,14 @@ class AnalisadorSteam:
         # se o ano nao tiver aparecido ainda, recebe o 1 e evita erro
 
     if not contagem_anos:
-      return None, 0
+      return [], 0
 
-    ano_campeao = max(contagem_anos, key = contagem_anos.get)
+    maior_qtd = max(contagem_anos.values())
+    anos_campeoes = sorted(
+        [ano for ano, qtd in contagem_anos.items() if qtd == maior_qtd]
+    )
 
-    maior_qtd = contagem_anos[ano_campeao]
-
-    return ano_campeao, maior_qtd
+    return anos_campeoes, maior_qtd
 
   # Pergunta 3: autoral - quantidade e percentual de jogos RPG disponíveis em portugues
   def jogos_rpg_pt(self):
